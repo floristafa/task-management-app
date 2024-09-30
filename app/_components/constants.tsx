@@ -1,4 +1,4 @@
-import { message, Modal, Typography } from "antd";
+import { message, Modal, PaginationProps, Typography } from "antd";
 import { Task } from "../types/task";
 import { deleteTask } from "../services/api-service";
 import { CloseCircleTwoTone } from "@ant-design/icons";
@@ -48,3 +48,15 @@ export const descriptionValidationRules: Rule[] =
         { max: 50, message: "Description should be less than 50 characters" },
         { min: 2, message: "Description should be more than 2 characters" },
     ]
+
+export const paginationItemRender: PaginationProps['itemRender'] = (_, type, originalElement) => {
+    if (type === 'prev') {
+        return <a>Previous</a>;
+    }
+    if (type === 'next') {
+        return <a>Next</a>;
+    }
+    return originalElement;
+};
+
+export const TASKS_PER_PAGE = 5
