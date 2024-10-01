@@ -4,9 +4,10 @@ import React, { useMemo, useState } from 'react';
 import TaskItem from './TaskItem';
 import { Task } from "../types/task";
 import dynamic from 'next/dynamic';
-import { List } from "antd";
+import { List, Space } from "antd";
 import { PaginationConfig } from "antd/es/pagination";
 import { paginationItemRender, TASKS_PER_PAGE } from "./constants";
+import { FileSearchOutlined, SearchOutlined } from "@ant-design/icons";
 
 const Droppable = dynamic(
     () =>
@@ -45,6 +46,14 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit }) => {
         setSelectedTaskId(selectedTaskId === taskId ? null : taskId);
     };
 
+    // Component to render when list has no items
+    const listEmpty =
+        <Space direction="vertical">
+            <FileSearchOutlined className="text-2xl" />
+            It looks like you haven't created any task yet!
+        </Space>
+
+
     return (
         // The Droppable component allows for dropping draggable items in the task list.
         <Droppable droppableId="taskList">
@@ -54,6 +63,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit }) => {
                         itemLayout="vertical"
                         grid={{ gutter: 16, column: 1 }}
                         pagination={pagination}
+                        locale={{ emptyText: listEmpty }}
                         dataSource={tasks}
                         renderItem={(task: Task, index: number) => (
                             // Render each task item using the TaskItem component.
