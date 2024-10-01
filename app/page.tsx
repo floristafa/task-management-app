@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 import { DropResult } from 'react-beautiful-dnd';
 import TaskForm from "./_components/TaskForm";
 import TaskList from "./_components/TaskList";
-import { getTasks, updateTask, createTask, deleteTask } from "./services/api-service";
+import { getTasks, updateTask, createTask } from "./services/api.service";
 import { Task } from "./types/task";
 import { v4 as uuidv4 } from "uuid";
 import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
@@ -96,7 +96,7 @@ const Home: React.FC = () => {
 
   return (
     <Flex vertical className="container mx-auto p-4" >
-      <Typography.Text className="text-6xl font-bold mb-4">Task Management</Typography.Text>
+      <Typography.Text className="text-3xl font-bold mb-4">Task Manager</Typography.Text>
       <Space>
         <Input
           placeholder="Search"

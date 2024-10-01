@@ -1,10 +1,12 @@
 "use client";
 
 import React from 'react';
-import { Button, Card, Flex, Space, Typography } from 'antd';
+import { Card, Dropdown, Flex, Space, Typography } from 'antd';
 import { Task } from "../types/task";
-import { showDeleteConfirm } from "./constants";
+import { getTaskMenuItems, showDeleteConfirm } from "./constants";
 import dynamic from 'next/dynamic';
+import { EllipsisOutlined } from "@ant-design/icons";
+import { Status } from "../types/status";
 
 const Draggable = dynamic(
     () =>
@@ -21,6 +23,9 @@ interface TaskItemProps {
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, index }) => {
+
+    const menuItems = getTaskMenuItems(onEdit, showDeleteConfirm, task)
+
     return (
         <Draggable key={task.id} draggableId={task.id} index={index}>
             {(provided) => (
@@ -29,17 +34,24 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, index }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <Card className="w-full py-6">
+                    <Card className="w-full">
                         <Flex justify="space-between" className="w-full" >
                             <Space direction="vertical">
                                 <Typography.Text className="font-bold capitalize">
-                                    {task.title} - {task.status}
+                                    {task.title}
                                 </Typography.Text>
                                 <Typography.Text className="capitalize">{task.description}</Typography.Text>
                             </Space>
-                            <Space>
-                                <Button onClick={() => onEdit(task)}>Edit</Button>
-                                <Button danger onClick={() => showDeleteConfirm(task)}>Delete</Button>
+                            <Space size={16}>
+                                <Typography.Text className={`${task.status === Status.ACTIVE ? 'text-blue-500' : ''}`} >
+                                    {task.status}
+                                </Typography.Text>
+                                <Dropdown
+                                    menu={{ items: menuItems }}
+                                    trigger={["click"]}
+                                >
+                                    <EllipsisOutlined rotate={90} />
+                                </Dropdown>
                             </Space>
                         </Flex>
                     </Card>

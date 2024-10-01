@@ -1,7 +1,7 @@
-import { message, Modal, PaginationProps, Typography } from "antd";
+import { MenuProps, message, Modal, PaginationProps, Typography } from "antd";
 import { Task } from "../types/task";
-import { deleteTask } from "../services/api-service";
-import { CloseCircleTwoTone } from "@ant-design/icons";
+import { deleteTask } from "../services/api.service";
+import { CloseCircleTwoTone, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Rule } from "antd/es/form";
 
 
@@ -60,3 +60,27 @@ export const paginationItemRender: PaginationProps['itemRender'] = (_, type, ori
 };
 
 export const TASKS_PER_PAGE = 5
+
+
+export const getTaskMenuItems = (
+    onEdit: (record: Task) => void,
+    showDeleteConfirm: (record: Task) => void,
+    record: Task
+): MenuProps["items"] => [
+        {
+            key: 'edit',
+            icon: <EditOutlined className="text-blue-500" />,
+            label: "Edit",
+            onClick: () => {
+                onEdit(record)
+            },
+        },
+        {
+            key: 'delete',
+            icon: <DeleteOutlined className="text-red-500" />,
+            label: 'Delete',
+            onClick: () => {
+                showDeleteConfirm(record)
+            },
+        }
+    ];
