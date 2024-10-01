@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Task Manager App
+
+## Overview
+The **Task Manager App** is a web application that allows users to create, update, delete, and manage tasks efficiently. The app provides a user-friendly interface for task management, enabling users to filter tasks based on their status and search through tasks quickly. It utilizes drag-and-drop functionality to reorder tasks seamlessly.
+
+## Features
+- Create new tasks with titles and descriptions.
+- Edit existing tasks.
+- Delete tasks.
+- Filter tasks by status: All, Active, or Completed.
+- Search for tasks by title or description.
+- Drag-and-drop functionality for task reordering.
+
+## Technologies and Frameworks Used
+- **Next.js**: A React framework for building server-rendered applications.
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A superset of JavaScript that adds static types for improved developer experience.
+- **Ant Design**: A design system and React UI library for building rich user interfaces.
+- **Tailwind CSS**: A utility-first CSS framework for styling the application.
+- **react-beautiful-dnd**: A library for adding drag-and-drop functionality to the React application.
+- **Local Storage**: Used to persist tasks data in the browser.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+Make sure you have the following installed on your machine:
+- Node.js (v14 or later)
+- npm (Node Package Manager) or yarn
 
-```bash
+### Installation
+
+1. **Clone the repository:**
+   git clone https://github.com/floristafa/task-management-app.git
+
+
+2. **Navigate to the project directory:**
+
+cd task-management-app
+
+3. **Install the dependencies:**
+
+npm install
+or
+yarn install
+
+### Running the Application
+
+1. **Start the development server:**
+
 npm run dev
-# or
+or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Open your browser and navigate to:**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+http://localhost:3000
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Usage
+Once the application is running, you can:
 
-## Learn More
+Add new tasks using the "Add Task" button.
+Edit existing tasks by clicking on ellipsis menu.
+Delete tasks using the provided delete functionality on ellipsis menu.
+Filter tasks using the segmented control or search for specific tasks using the search input.
+Reorder tasks by dragging and dropping them in the list.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Contributing
+Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request.
