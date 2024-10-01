@@ -109,6 +109,7 @@ const Home: React.FC = () => {
         <Segmented<string>
           options={['All', Status.ACTIVE, Status.COMPLETED]}
           onChange={handleSegmentedChange}
+          className="bg-blue-200"
         />
         <TaskForm onAdd={handleAdd} task={currentTask} visible={formVisible} setVisible={setFormVisible} />
         <Button type="primary" icon={<PlusOutlined />} onClick={() => { setCurrentTask(null); setFormVisible(true); }}>

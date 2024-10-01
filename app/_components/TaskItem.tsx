@@ -43,7 +43,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, index }) => {
                                 <Typography.Text className="capitalize">{task.description}</Typography.Text>
                             </Space>
                             <Space size={16}>
-                                <Typography.Text className={`${task.status === Status.ACTIVE ? 'text-blue-500' : ''}`} >
+                                <Typography.Text className={`${task.status === Status.ACTIVE ? 'text-blue-600' : ''}`} >
                                     {task.status}
                                 </Typography.Text>
                                 <Dropdown
