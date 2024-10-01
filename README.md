@@ -37,7 +37,8 @@ Make sure you have the following installed on your machine:
 2. **Navigate to the project directory:**
 
 cd task-management-app
-3. **Choose your setup method::**
+
+3. **Choose your setup method:**
 
    **Manual setup without Docker**
 
