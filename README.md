@@ -26,6 +26,7 @@ The **Task Manager App** is a web application that allows users to create, updat
 Make sure you have the following installed on your machine:
 - Node.js (v14 or later)
 - npm (Node Package Manager) or yarn
+- Docker Desktop (if you want to run the app with Docker)
 
 ### Installation
 
@@ -36,22 +37,29 @@ Make sure you have the following installed on your machine:
 2. **Navigate to the project directory:**
 
 cd task-management-app
+3. **Choose your setup method::**
 
-3. **Install the dependencies:**
+   **Manual setup without Docker**
 
-npm install
-or
-yarn install
+   1. **Install the dependencies:**
 
-### Running the Application
+   npm install
+   or
+   yarn install
 
-1. **Start the development server:**
+   ### Running the Application
 
-npm run dev
-or
-yarn dev
+   2. **Start the development server:**
 
-2. **Open your browser and navigate to:**
+   npm run dev
+   or
+   yarn dev
+
+   **Setup with Docker Desktop**
+   - npm run "container:start" to start the container
+   - npm run "container:stop" to stop the container
+
+4. **Open your browser and navigate to:**
 
 http://localhost:3000
 

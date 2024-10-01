@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "container:start": "docker compose up --build -V -d",
+    "container:stop": "docker compose down"
   },
   "dependencies": {
     "@ant-design/icons": "^5.5.1",
