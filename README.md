@@ -19,6 +19,7 @@ The **Task Manager App** is a web application that allows users to create, updat
 - **Tailwind CSS**: A utility-first CSS framework for styling the application.
 - **react-beautiful-dnd**: A library for adding drag-and-drop functionality to the React application.
 - **Local Storage**: Used to persist tasks data in the browser.
+- **Docker**: A platform for developing, shipping, and running applications in containers.
 
 ## Getting Started
 
