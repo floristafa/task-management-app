@@ -51,11 +51,12 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd, task, visible, setVisible })
     };
 
     // Options for the status select dropdown.
-    const selectOptions = [Status.ACTIVE, Status.COMPLETED];
-    const statusOptions = selectOptions.map((status) => ({
-        value: status,
-        label: status,
-    }));
+
+    const statusOptions =
+        Object.values(Status).map((status) => ({
+            value: status,
+            label: status,
+        }))
 
     return (
         // Modal component for adding or editing a task.
