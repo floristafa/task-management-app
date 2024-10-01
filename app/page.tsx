@@ -27,13 +27,14 @@ const Droppable = dynamic(
 );
 
 const Home: React.FC = () => {
+  // State variables for managing tasks, current task, filters, and form visibility
   const [tasks, setTasks] = useState<Task[]>([]);
   const [currentTask, setCurrentTask] = useState<Task | null>(null);
   const [filter, setFilter] = useState<string>('All');
   const [formVisible, setFormVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState<string>('');
 
-  // Fetch tasks only on the client side to avoid hydration issues
+  // Hook to Fetch tasks with dependency on tasks so it refetches on change
   useEffect(() => {
     const fetchTasks = async () => {
       const fetchedTasks = await getTasks();
@@ -41,11 +42,13 @@ const Home: React.FC = () => {
     };
 
     fetchTasks();
-  }, [tasks]); // Only run once on mount
+  }, [tasks]);
 
+  // Handle task addition and editing
   const handleAdd = async (task: Omit<Task, 'id'>) => {
     const newTask = { ...task, id: uuidv4(), status: Status.ACTIVE }; // Set default status to ACTIVE
     if (currentTask) {
+      // Update existing task if currently editing
       await updateTask({ ...currentTask, ...task }); // Spread currentTask to retain the id and status
       message.success('Task updated successfully');
 
@@ -54,6 +57,7 @@ const Home: React.FC = () => {
       setTasks(updatedTasks);
       localStorage.setItem('tasks', JSON.stringify(updatedTasks)); // Update local storage
     } else {
+      // Create a new task if no current task is being edited
       await createTask(newTask);
       message.success('Task added successfully');
 
@@ -66,22 +70,25 @@ const Home: React.FC = () => {
     setFormVisible(false);
   };
 
+  // Set current task for editing
   const handleEdit = (task: Task) => {
     setCurrentTask(task);
     setFormVisible(true);
   };
 
+  // Handle drag-and-drop functionality
   const onDragEnd = async (result: DropResult) => {
     if (!result.destination) return;
 
     const reorderedTasks = Array.from(tasks);
-    const [removed] = reorderedTasks.splice(result.source.index, 1);
-    reorderedTasks.splice(result.destination.index, 0, removed);
+    const [removed] = reorderedTasks.splice(result.source.index, 1); // Remove the dragged task
+    reorderedTasks.splice(result.destination.index, 0, removed); // Insert it at the new position
     setTasks(reorderedTasks);
-    localStorage.setItem('tasks', JSON.stringify(reorderedTasks));
+    localStorage.setItem('tasks', JSON.stringify(reorderedTasks)); // Update local storage
     message.success('Tasks reordered successfully');
   };
 
+  // Filter tasks based on search term and selected status
   const filteredTasks = tasks.filter(task => {
     const matchesSearch = [task.title, task.description || '']
       .some(field => field.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -90,6 +97,7 @@ const Home: React.FC = () => {
     return matchesSearch;
   });
 
+  // Handle changes to the filter segmented control
   const handleSegmentedChange = (value: string) => {
     setFilter(value);
   };

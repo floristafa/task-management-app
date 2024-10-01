@@ -1,5 +1,6 @@
 import { Task } from "../types/task";
 
+// Asynchronously retrieves tasks from localStorage after simulating a delay.
 export const getTasks = async (): Promise<Task[]> => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -13,6 +14,7 @@ export const getTasks = async (): Promise<Task[]> => {
     });
 };
 
+// Asynchronously creates a new task in localStorage after simulating a delay.
 export const createTask = async (task: Task): Promise<Task> => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -28,6 +30,7 @@ export const createTask = async (task: Task): Promise<Task> => {
     });
 };
 
+// Asynchronously updates an existing task in localStorage after simulating a delay.
 export const updateTask = async (updatedTask: Task): Promise<Task> => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -49,6 +52,7 @@ export const updateTask = async (updatedTask: Task): Promise<Task> => {
     });
 };
 
+// Asynchronously deletes a task from localStorage by its ID after simulating a delay.
 export const deleteTask = async (id: string): Promise<void> => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {

@@ -16,6 +16,10 @@ const Draggable = dynamic(
     { ssr: false },
 );
 
+// This component is responsible for rendering an individual task item as a draggable element.
+// It accepts a task, an edit handler, and the index as props. The task is draggable using `react-beautiful-dnd`.
+// It also displays the task details like title, description, and status, with additional options provided through a dropdown menu.
+
 interface TaskItemProps {
     task: Task;
     onEdit: (task: Task) => void;
@@ -24,9 +28,12 @@ interface TaskItemProps {
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, index }) => {
 
+    // Generate the menu items for the task dropdown (e.g., edit, delete).
+
     const menuItems = getTaskMenuItems(onEdit, showDeleteConfirm, task)
 
     return (
+        // The Draggable component enables drag-and-drop functionality for this task.
         <Draggable key={task.id} draggableId={task.id} index={index}>
             {(provided) => (
                 <div

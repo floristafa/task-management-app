@@ -16,6 +16,8 @@ const Droppable = dynamic(
     { ssr: false },
 );
 
+// This component renders a list of tasks, allowing for drag-and-drop functionality and pagination.
+// It receives a list of tasks and an edit handler as props, and manages the current page state for pagination.
 interface TaskListProps {
     tasks: Task[];
     onEdit: (task: Task) => void;
@@ -23,7 +25,9 @@ interface TaskListProps {
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit }) => {
 
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1); // State to track the current page in the pagination.
+
+    // Memoized pagination configuration to improve performance and avoid unnecessary recalculations.
 
     const pagination: PaginationConfig | false = useMemo(() => {
         if (!tasks?.length || tasks?.length / TASKS_PER_PAGE <= 1)
@@ -39,6 +43,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit }) => {
     }, [currentPage, tasks?.length, setCurrentPage]);
 
     return (
+        // The Droppable component allows for dropping draggable items in the task list.
         <Droppable droppableId="taskList">
             {(provided) => (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -48,6 +53,7 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit }) => {
                         pagination={pagination}
                         dataSource={tasks}
                         renderItem={(task: Task, index: number) => (
+                            // Render each task item using the TaskItem component.
                             <List.Item>
                                 <TaskItem key={task.id} task={task} onEdit={onEdit}
                                     index={index}></TaskItem>

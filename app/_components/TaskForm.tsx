@@ -6,6 +6,8 @@ import { Task } from "../types/task";
 import { Status } from "../types/status";
 import { descriptionValidationRules, titleValidationRules } from "./constants";
 
+// This component renders a form for adding or editing a task within a modal.
+// It handles form validation and state management to ensure the form is correctly filled out.
 interface TaskFormProps {
     onAdd: (task: Task) => void;
     task: Task | null;
@@ -30,24 +32,25 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd, task, visible, setVisible })
 
     useEffect(() => {
         if (task) {
-            // Ensure that form values are set correctly for editing
+            // Populate the form fields with the task data for editing.
             form.setFieldsValue({
                 title: task.title,
                 description: task.description,
                 status: task.status,
             });
         } else {
-            // Reset the form for adding a new task
+            // Reset the form fields when adding a new task.
             form.resetFields();
         }
     }, [task, form]);
 
     const handleFinish = (values: Task) => {
-        onAdd(values);
-        form.resetFields();
-        setVisible(false);
+        onAdd(values); // Call the onAdd function with the form values.
+        form.resetFields(); // Reset the form fields after submission.
+        setVisible(false); // Close the modal.
     };
 
+    // Options for the status select dropdown.
     const selectOptions = [Status.ACTIVE, Status.COMPLETED];
     const statusOptions = selectOptions.map((status) => ({
         value: status,
@@ -55,12 +58,14 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd, task, visible, setVisible })
     }));
 
     return (
+        // Modal component for adding or editing a task.
         <Modal
             title={task ? "Edit Task" : "Add Task"}
             open={visible}
             onCancel={() => setVisible(false)}
             footer={null}
         >
+            {/* Ant Design Form component for capturing task details. */}
             <Form form={form} onFinish={handleFinish} layout="vertical">
 
                 <Form.Item
