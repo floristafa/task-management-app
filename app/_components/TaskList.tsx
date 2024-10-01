@@ -24,23 +24,26 @@ interface TaskListProps {
 }
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit }) => {
-
     const [currentPage, setCurrentPage] = useState(1); // State to track the current page in the pagination.
+    const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null); // State to track the selected task
 
     // Memoized pagination configuration to improve performance and avoid unnecessary recalculations.
 
     const pagination: PaginationConfig | false = useMemo(() => {
-        if (!tasks?.length || tasks?.length / TASKS_PER_PAGE <= 1)
-            return false;
+        if (!tasks?.length || tasks.length / TASKS_PER_PAGE <= 1) return false;
         return {
             onChange: setCurrentPage,
             current: currentPage,
             pageSize: TASKS_PER_PAGE,
-            total: tasks?.length || 0,
+            total: tasks.length,
             align: "center",
             itemRender: paginationItemRender,
         };
-    }, [currentPage, tasks?.length, setCurrentPage]);
+    }, [currentPage, tasks.length]);
+
+    const handleTaskClick = (taskId: string) => {
+        setSelectedTaskId(selectedTaskId === taskId ? null : taskId);
+    };
 
     return (
         // The Droppable component allows for dropping draggable items in the task list.
@@ -54,9 +57,15 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onEdit }) => {
                         dataSource={tasks}
                         renderItem={(task: Task, index: number) => (
                             // Render each task item using the TaskItem component.
-                            <List.Item>
-                                <TaskItem key={task.id} task={task} onEdit={onEdit}
-                                    index={index}></TaskItem>
+                            <List.Item >
+                                <TaskItem
+                                    key={task.id}
+                                    task={task}
+                                    onEdit={onEdit}
+                                    index={index}
+                                    onClick={() => handleTaskClick(task.id)}
+                                    isDescriptionVisible={selectedTaskId === task.id}
+                                />
                             </List.Item>
                         )}
                     />

@@ -24,13 +24,14 @@ interface TaskItemProps {
     task: Task;
     onEdit: (task: Task) => void;
     index: number;
+    isDescriptionVisible: boolean; // Added prop to control visibility
+    onClick: () => void; // This allows toggling the task description
 }
 
-const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, index }) => {
+const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, index, isDescriptionVisible, onClick }) => {
 
     // Generate the menu items for the task dropdown (e.g., edit, delete).
-
-    const menuItems = getTaskMenuItems(onEdit, showDeleteConfirm, task)
+    const menuItems = getTaskMenuItems(onEdit, showDeleteConfirm, task);
 
     return (
         // The Draggable component enables drag-and-drop functionality for this task.
@@ -42,15 +43,17 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onEdit, index }) => {
                     {...provided.dragHandleProps}
                 >
                     <Card className="w-full">
-                        <Flex justify="space-between" className="w-full" >
+                        <Flex justify="space-between" className="w-full" gap={8}>
                             <Space direction="vertical">
-                                <Typography.Text className="font-bold capitalize">
+                                <Typography.Text className="font-bold capitalize" onClick={onClick}>
                                     {task.title}
                                 </Typography.Text>
-                                <Typography.Text className="capitalize">{task.description}</Typography.Text>
+                                {isDescriptionVisible && ( // Use the prop to conditionally render the description
+                                    <Typography.Text className="capitalize">{task.description}</Typography.Text>
+                                )}
                             </Space>
-                            <Space size={16}>
-                                <Typography.Text className={`${task.status === Status.ACTIVE ? 'text-blue-600' : ''}`} >
+                            <Space size={16} className="w-28 justify-end">
+                                <Typography.Text className={`${task.status === Status.ACTIVE ? 'text-blue-600' : ''}`}>
                                     {task.status}
                                 </Typography.Text>
                                 <Dropdown
