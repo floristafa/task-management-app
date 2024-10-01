@@ -20,6 +20,7 @@ The **Task Manager App** is a web application that allows users to create, updat
 - **react-beautiful-dnd**: A library for adding drag-and-drop functionality to the React application.
 - **Local Storage**: Used to persist tasks data in the browser.
 - **Docker**: A platform for developing, shipping, and running applications in containers.
+- **Jest**: A JavaScript testing framework for running unit tests and ensuring code quality.
 
 ## Getting Started
 
