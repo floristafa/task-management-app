@@ -74,7 +74,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd, task, visible, setVisible })
                     name="description"
                     label="Description"
                     rules={descriptionValidationRules}>
-                    <Input.TextArea placeholder="Enter description..." />
+                    <Input.TextArea autoSize={{ minRows: 2, maxRows: 5 }} placeholder="Enter description..." />
                 </Form.Item>
 
                 {task && (

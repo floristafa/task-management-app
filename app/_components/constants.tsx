@@ -45,7 +45,7 @@ export const titleValidationRules: Rule[] = [
 
 export const descriptionValidationRules: Rule[] =
     [
-        { max: 50, message: "Description should be less than 50 characters" },
+        { max: 255, message: "Description should be less than 255 characters" },
         { min: 2, message: "Description should be more than 2 characters" },
     ]
 
